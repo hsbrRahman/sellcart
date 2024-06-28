@@ -3,6 +3,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetClose } from "./ui/sheet";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { CiMenuFries } from "react-icons/ci";
+import Cart from "./Cart";
 
 const links = [
   {
@@ -27,7 +28,7 @@ const MobileNav = () => {
           <SheetClose asChild>
             <Link href="/">
               <h1 className="text-4xl font-semibold">
-                Hasibur <span className="text-accent">.</span>
+                SellMart <span className="text-accent">.</span>
               </h1>
             </Link>
           </SheetClose>
@@ -40,16 +41,15 @@ const MobileNav = () => {
                 <Link
                   href={link.path}
                   key={index}
-                  className={`${
-                    link.path === pathname &&
-                    "text-white border-b-2 border-red-500"
-                  } capitalize font-medium hover:text-green-500 transition-all`}
+                  className=" hover:border-b-4 border-accent
+                  capitalize font-semibold hover:text-slate-600"
                 >
                   {link.name}
                 </Link>
               </SheetClose>
             );
           })}
+          <Cart />
         </nav>
       </SheetContent>
     </Sheet>
