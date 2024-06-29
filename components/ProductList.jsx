@@ -6,88 +6,54 @@ const products = [
     name: "chair",
     price: "50.34",
     uid: "",
-    desccription: "A luxurious chair",
+    description: "A luxurious chair",
   },
   {
     id: 2,
     name: "table",
-    price: "650.99",
+    price: "500.34",
     uid: "",
-    desccription: "A luxurious table",
+    description: "A table",
   },
   {
     id: 3,
-    name: "wardrobe",
-    price: "1250.34",
+    name: "table",
+    price: "500.34",
     uid: "",
-    desccription: "A luxurious wardrobe",
+    description: "A table",
   },
   {
     id: 4,
-    name: "wardrobe",
-    price: "1250.34",
+    name: "table",
+    price: "500.34",
     uid: "",
-    desccription: "A luxurious wardrobe",
+    description: "A table",
   },
   {
     id: 5,
-    name: "wardrobe",
-    price: "1250.34",
+    name: "table",
+    price: "500.34",
     uid: "",
-    desccription: "A luxurious wardrobe",
-  },
-  {
-    id: 6,
-    name: "wardrobe",
-    price: "1250.34",
-    uid: "",
-    desccription: "A luxurious wardrobe",
-  },
-  {
-    id: 7,
-    name: "wardrobe",
-    price: "1250.34",
-    uid: "",
-    desccription: "A luxurious wardrobe",
-  },
-  {
-    id: 8,
-    name: "wardrobe",
-    price: "1250.34",
-    uid: "",
-    desccription: "A luxurious wardrobe",
-  },
-  {
-    id: 9,
-    name: "wardrobe",
-    price: "1250.34",
-    uid: "",
-    desccription: "A luxurious wardrobe",
+    description: "A table",
   },
 ];
+
 const ProductList = () => {
   return (
-    <ScrollArea className="h-[500px] border border-accent p-4 bg-slate-300 rounded-xl">
-      <p className="font-extrabold text-4xl border-b-2 border-accent bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-        Featured Products
-      </p>
-
-      <ul className="pt-4 grid grid-cols-1 lg:grid-cols-4 gap-[30px]">
+    <ScrollArea className="mx-auto h-full border border-accent p-2 bg-slate-300 rounded-xl">
+      <ul className="flex flex-col gap-1">
         {products.map((product, index) => {
           return (
-            <li
-              key={index}
-              className="bg-white h-[184px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start gap-1"
-            >
-              <span className="text-accent text-2xl font-bold">
-                {product.name}
-              </span>
-              <h3 className="text-xl max-w-[260px] min-h-[60px] text-center lg:text-left ">
-                {product.desccription}
-              </h3>
-              <div className="flex items-center gap-3">
-                <span className="font-semibold text-accent">$</span>
-                <p className="text-black">{product.price}</p>
+            <li key={index} className="h-[100px]">
+              <div className=" h-full rounded-xl flex">
+                <div className="w-[25%] bg-red-300">image</div>
+                <div className="w-[75%] bg-teal-400">
+                  <div className="w-full h-full flex flex-col">
+                    <p className="text-2xl">{product.name}</p>
+                    <p className="text-lg">{product.description}</p>
+                    <p className="text-md">{product.price}</p>
+                  </div>
+                </div>
               </div>
             </li>
           );
