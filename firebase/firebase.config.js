@@ -1,13 +1,14 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+require("dotenv").config();
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDnPbZsK_ug9d86vkHnNcC252zAPgt4no0",
-  authDomain: "sellmart-5f2b4.firebaseapp.com",
-  projectId: "sellmart-5f2b4",
-  storageBucket: "sellmart-5f2b4.appspot.com",
-  messagingSenderId: "40844148719",
-  appId: "1:40844148719:web:a974a586e44c38ea43001a",
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID,
 };
 
 export const app = initializeApp(firebaseConfig);
