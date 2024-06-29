@@ -2,7 +2,7 @@ import ProductList from "@/components/ProductList";
 import UploadProduct from "@/components/UploadProduct";
 import { Input } from "@/components/ui/input";
 
-const page = () => {
+const page = ({ params }) => {
   return (
     <div className="w-screen h-screen p-2">
       <section className="container bg-red-100 w-[90%] mx-auto h-[85%] flex flex-col justify-center items-center md:flex-row gap-1">
@@ -17,9 +17,9 @@ const page = () => {
             </div>
           </div>
         </div>
-        <div className="h-full w-[70%] rounded-xl flex flex-col items-center justify-center gap-4 bg-blue-200">
+        <div className="h-full w-[70%] rounded-xl flex flex-col items-center lg:items-start justify-center gap-4 bg-blue-200">
           <div className="h-[10%]">
-            <UploadProduct />
+            <UploadProduct params={params} />
           </div>
           <div className="w-full max-h-[400px] ">
             <ProductList />
