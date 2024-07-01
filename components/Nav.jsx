@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Login from "./Login";
 
 const links = [
   {
@@ -11,9 +12,12 @@ const links = [
 
 const Nav = () => {
   const pathname = usePathname();
+
   return (
     <nav className="flex gap-8">
-      {links.map((link, index) => {
+      <Login />
+
+      {/* {links.map((link, index) => {
         return (
           <Link
             href={link.path}
@@ -23,7 +27,7 @@ const Nav = () => {
             {link.name}
           </Link>
         );
-      })}
+      })} */}
     </nav>
   );
 };

@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Nav from "./Nav";
 import MobileNav from "./MobileNav";
 import ProductSearch from "./ProductSearch";
 import Cart from "./Cart";
+import Login from "./Login";
 
 const Header = () => {
   return (
@@ -15,7 +15,8 @@ const Header = () => {
         </Link>
         <ProductSearch />
         <div className="hidden xl:flex items-center gap-8">
-          <Nav />
+          {/* <Nav /> */}
+          <Login />
           <Cart />
         </div>
         <div className="xl:hidden">

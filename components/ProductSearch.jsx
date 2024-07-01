@@ -9,7 +9,7 @@ const ProductSearch = () => {
       <Input type="input" placeholder="Search for products..." />
       <Button
         type="submit"
-        className="rounded-full text-3xl  bg-[#e5e4ec] hover:bg-black"
+        className="rounded-full text-3xl  bg-[#e5e4ec] hover:bg-indigo-700"
       >
         <TbBasketSearch color="#00b4d8" />
       </Button>
