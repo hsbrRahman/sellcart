@@ -1,43 +1,36 @@
 "use client";
 import { useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth"; // Import onAuthStateChanged
 import Link from "next/link";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-  DropdownMenuSeparator,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "./ui/button";
 import { signout } from "@/auth/signout";
 import { useRouter } from "next/navigation";
-import { auth } from "@/firebase/firebase.auth";
+import { getCurrentUser } from "@/auth/getCurrentUser";
 
 const Login = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [user, setUser] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setCurrentUser(user);
-      } else {
-        setCurrentUser(null);
-      }
-    });
-
-    return () => unsubscribe();
+    const fetchUser = async () => {
+      const currentUser = await getCurrentUser();
+      setUser(currentUser);
+    };
+    fetchUser();
   }, []);
 
   const handleSignOut = async () => {
     try {
-      await signout(); // Ensure signout completes before proceeding
-      setCurrentUser(null);
+      signout();
+      setUser(null);
       setMenuOpen(false);
-      router.refresh();
-      router.push("/"); // Redirect to home page
+      router.push("/");
     } catch (error) {
       console.error("Error signing out:", error);
     }
@@ -45,9 +38,14 @@ const Login = () => {
 
   return (
     <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen}>
-      {currentUser ? (
-        <DropdownMenuTrigger onClick={() => setMenuOpen(!menuOpen)}>
-          {currentUser.displayName}
+      {user ? (
+        <DropdownMenuTrigger>
+          <Button
+            onClick={() => setMenuOpen((prev) => !prev)}
+            className="outline-none font-bold bg-pink-40 hover:bg-accent/30 text-black capitalize text-2xl"
+          >
+            {user.displayName}
+          </Button>
         </DropdownMenuTrigger>
       ) : (
         <Link
@@ -57,22 +55,21 @@ const Login = () => {
           Login/SignUp
         </Link>
       )}
-
       <DropdownMenuContent className="bg-pink-50">
-        {currentUser && (
+        {user && (
           <DropdownMenuItem>
-            <Link href={`/dashboard/${currentUser.uid}`}>
+            <Link href={`/dashboard/${user.uid}`}>
               <Button className="w-full">Dashboard</Button>
             </Link>
           </DropdownMenuItem>
         )}
-
-        {/* <DropdownMenuSeparator /> */}
-        <DropdownMenuItem>
-          <Button onClick={handleSignOut} className="w-full">
-            Logout
-          </Button>
-        </DropdownMenuItem>
+        {user && (
+          <DropdownMenuItem>
+            <Button onClick={handleSignOut} className="w-full">
+              Logout
+            </Button>
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { db } from "@/firebase/firebase.config";
 import { storage } from "@/firebase/firebase.storage";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -24,6 +24,7 @@ const UploadProduct = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [imageUploads, setImageUploads] = useState([]);
+  const [uploadComplete, setUploadComplete] = useState(false);
   const [productDetails, setProductDetails] = useState({
     title: "",
     description: "",
@@ -31,6 +32,7 @@ const UploadProduct = () => {
     price: "",
     stock: "",
     uid: "",
+    id: "",
   });
 
   const handleInputChange = (e) => {
@@ -45,7 +47,6 @@ const UploadProduct = () => {
     event.preventDefault();
     setLoading(true);
     await uploadImages();
-    router.refresh();
   };
 
   const uploadImages = async () => {
@@ -67,6 +68,7 @@ const UploadProduct = () => {
         console.error("Error uploading images: ", error);
       } finally {
         setLoading(false);
+        setUploadComplete(true);
       }
     }
   };
@@ -81,7 +83,8 @@ const UploadProduct = () => {
         reviews: [],
         uid: `${user ? user.uid : ""}`,
       });
-      console.log("Document written with ID: ", docRef.id);
+      const productRef = doc(db, "products", docRef.id);
+      setDoc(productRef, { id: docRef.id }, { merge: true });
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -95,12 +98,17 @@ const UploadProduct = () => {
     fetchUser();
   }, []);
 
+  useEffect(() => {
+    if (uploadComplete) {
+      router.refresh();
+    }
+  }, [uploadComplete, router]);
+
   return (
     <Dialog className="">
       <DialogTrigger
         className="w-[240px] p-3 bg-pink-50 text-accent rounded-xl font-semibold text-xl hover:bg-slate-300"
         disabled={loading}
-        asChild
       >
         {loading ? "Uploading..." : "Upload a product"}
       </DialogTrigger>

@@ -5,10 +5,10 @@ import { Input } from "@/components/ui/input";
 const page = () => {
   return (
     <div className="w-screen h-screen p-2">
-      <section className="container bg-red-100 w-[90%] mx-auto h-[85%] flex flex-col justify-center items-center md:flex-row gap-1">
-        <div className="h-[50%] md:h-full w-full md:w-[30%] rounded-xl bg-yellow-100">
+      <section className="container  w-[90%] mx-auto h-[85%] flex flex-col justify-center items-center md:flex-row gap-1">
+        <div className="h-[50%] md:h-full w-full md:w-[30%] rounded-xl ">
           <div className="m-auto w-[90%] h-[90%] flex md:flex-col justify-center items-center">
-            <div className="bg-indigo-100 w-[50%] h-[100%] md:w-[50%] md:h-[15%] rounded-full">
+            <div className=" w-[50%] h-[100%] md:w-[50%] md:h-[15%] rounded-full">
               user avatar/photo
             </div>
             <div className="w-full">
@@ -17,11 +17,11 @@ const page = () => {
             </div>
           </div>
         </div>
-        <div className="h-full w-[70%] rounded-xl flex flex-col items-center lg:items-start justify-center gap-4 bg-blue-200">
-          <div className="h-[10%]">
+        <div className="h-full w-[70%] rounded-xl flex flex-col items-center lg:justify-start lg:items-start justify-center gap-4 bg-slate-50">
+          <div className="h-[10%] w-full bg-white">
             <UploadProduct />
           </div>
-          <div className="w-full max-h-[400px] ">
+          <div className="w-full max-h-[500px] ">
             <ProductList />
           </div>
         </div>

@@ -1,9 +1,8 @@
-"use client";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "./ui/sheet";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { CiMenuFries } from "react-icons/ci";
 import Cart from "./Cart";
+import Login from "./Login";
 
 const links = [
   {
@@ -17,7 +16,6 @@ const links = [
 ];
 
 const MobileNav = () => {
-  const pathname = usePathname();
   return (
     <Sheet>
       <SheetTrigger className="flex justify-center items-center">
@@ -35,20 +33,10 @@ const MobileNav = () => {
         </div>
 
         <nav className="flex flex-col justify-center items-center gap-8">
-          {links.map((link, index) => {
-            return (
-              <SheetClose key={index} asChild>
-                <Link
-                  href={link.path}
-                  key={index}
-                  className=" hover:border-b-4 border-accent
-                  capitalize font-semibold hover:text-slate-600"
-                >
-                  {link.name}
-                </Link>
-              </SheetClose>
-            );
-          })}
+          <SheetClose asChild>
+            <Login />
+          </SheetClose>
+
           <Cart />
         </nav>
       </SheetContent>

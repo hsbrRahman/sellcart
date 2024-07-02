@@ -10,6 +10,7 @@ import { ScrollArea } from "./ui/scroll-area";
 import { db } from "@/firebase/firebase.config";
 import { useEffect, useState } from "react";
 import { getCurrentUser } from "@/auth/getCurrentUser";
+import Product from "./Product";
 
 const ProductList = () => {
   const [user, setUser] = useState(null);
@@ -34,7 +35,6 @@ const ProductList = () => {
               createdAt: serverTimestamp,
             });
           });
-          console.log("Products List:", productsList);
           setProducts(productsList);
         }
       } catch (error) {
@@ -46,23 +46,13 @@ const ProductList = () => {
   }, []);
 
   return (
-    <ScrollArea className="mx-auto h-full border border-accent p-2 bg-slate-300 rounded-xl">
+    <ScrollArea className="mx-auto h-full border-2  hover:border-accent p-2  rounded-xl">
       <ul className="flex flex-col gap-1 ">
         {products.length > 0 ? (
-          products.map((product) => {
+          products.map((product, i) => {
             return (
-              <li key={product.id} className="h-[100px]">
-                <div className=" h-full rounded-xl flex">
-                  <div className="w-[25%] bg-red-300">image</div>
-                  <div className="w-[75%] bg-teal-400">
-                    <div className="w-full h-full flex flex-col">
-                      <p className="text-2xl">{product.name}</p>
-                      <p className="text-lg">{product.description}</p>
-                      <p className="text-md">{product.category}</p>
-                      <p className="text-xl text-accent">{product.price}</p>
-                    </div>
-                  </div>
-                </div>
+              <li key={product.id} className="h-[120px] bg-slate-200">
+                <Product {...products[i]} />
               </li>
             );
           })
