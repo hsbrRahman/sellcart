@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "@/firebase/firebase.config";
@@ -14,10 +14,14 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "./ui/input";
 import { v4 as uuidv4 } from "uuid";
-import { auth } from "@/firebase/firebase.auth";
+import Link from "next/link";
+import { RiLoginBoxLine } from "react-icons/ri";
+import { useRouter } from "next/navigation";
+import { getCurrentUser } from "@/auth/getCurrentUser";
 
 const UploadProduct = () => {
-  const user = auth.currentUser;
+  const [user, setUser] = useState(null);
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [imageUploads, setImageUploads] = useState([]);
   const [productDetails, setProductDetails] = useState({
@@ -41,7 +45,7 @@ const UploadProduct = () => {
     event.preventDefault();
     setLoading(true);
     await uploadImages();
-    console.log(user.uid);
+    router.refresh();
   };
 
   const uploadImages = async () => {
@@ -83,11 +87,20 @@ const UploadProduct = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      const currentUser = await getCurrentUser();
+      setUser(currentUser);
+    };
+    fetchUser();
+  }, []);
+
   return (
     <Dialog className="">
       <DialogTrigger
         className="w-[240px] p-3 bg-pink-50 text-accent rounded-xl font-semibold text-xl hover:bg-slate-300"
         disabled={loading}
+        asChild
       >
         {loading ? "Uploading..." : "Upload a product"}
       </DialogTrigger>
@@ -164,9 +177,11 @@ const UploadProduct = () => {
             </DialogTitle>
           </DialogHeader>
           <div className="text-center mt-4">
-            <Button className="bg-blue-500 hover:bg-accent text-white p-4 rounded-xl w-full text-2xl ">
-              Log In
-            </Button>
+            <Link href={"/login"}>
+              <Button className="bg-blue-500 hover:bg-accent text-white p-4 rounded-xl w-full text-2xl ">
+                Log In <RiLoginBoxLine />
+              </Button>
+            </Link>
           </div>
         </DialogContent>
       )}

@@ -37,7 +37,7 @@ const SignUp = () => {
     } catch (error) {
       alert(error.message);
     } finally {
-      router.refresh();
+      router.push("/");
     }
   };
 
