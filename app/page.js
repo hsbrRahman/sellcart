@@ -1,7 +1,8 @@
 import HomeCarousel from "@/components/HomeCarousel";
 import ProductsSection from "@/components/ProductsSection";
-
-export default function Home() {
+import { getProducts } from "@/lib/getProducts";
+export default async function Home() {
+  const products = await getProducts("products");
   return (
     <main className="flex flex-col min-h-screen w-full">
       <section className=" flex min-h-screen flex-col items-center justify-between p-24 lg:flex-row bg-slate-200">
@@ -19,12 +20,12 @@ export default function Home() {
               </div>
             </div>
             <div>
-              <HomeCarousel />
+              <HomeCarousel products={[...products]} />
             </div>
           </div>
         </div>
       </section>
-      <ProductsSection />
+      <ProductsSection products={[...products]} />
     </main>
   );
 }
