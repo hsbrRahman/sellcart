@@ -1,18 +1,16 @@
-import { Inter } from "next/font/google";
+import { Vollkorn } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
-
-const inter = Inter({ subsets: ["latin"] });
-
+const vollkorn = Vollkorn({ subsets: ["latin"] });
 export const metadata = {
-  title: "SellMart",
+  title: "SellCart",
   description: "Ecommerce website",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={vollkorn.className}>
         <Header />
         {children}
       </body>

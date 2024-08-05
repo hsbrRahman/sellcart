@@ -1,10 +1,11 @@
+import Footer from "@/components/Footer";
 import HomeCarousel from "@/components/HomeCarousel";
 import ProductsSection from "@/components/ProductsSection";
 import { getProducts } from "@/lib/getProducts";
 export default async function Home() {
   const products = await getProducts("products");
   return (
-    <main className="flex flex-col min-h-screen w-full">
+    <main className="flex flex-col min-h-screen w-full md:gap-2 lg:gap-6">
       <section className=" flex min-h-screen flex-col items-center justify-between p-24 lg:flex-row bg-slate-200">
         <div className="container mx-auto -mt-20 ">
           <div className="flex flex-col xl:flex-row items-center justify-between gap-8 lg:gap-0">
@@ -26,6 +27,7 @@ export default async function Home() {
         </div>
       </section>
       <ProductsSection products={[...products]} />
+      <Footer />
     </main>
   );
 }

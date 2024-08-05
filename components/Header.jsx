@@ -9,8 +9,11 @@ const Header = () => {
     <header className="py-6 xl:py-8 text-black bg-pink-200/20">
       <div className="container mx-auto flex justify-between items-center ">
         <Link href="/">
-          <h1 className="text-4xl font-semibold">
-            SellMart<span className="text-accent">.</span>
+          <h1 className="text-4xl font-bold">
+            <span className="bg-gradient-to-r from-teal-600 to-blue-500 bg-clip-text text-transparent">
+              SellCart
+            </span>
+            <span className="text-accent">.</span>
           </h1>
         </Link>
         <ProductSearch />

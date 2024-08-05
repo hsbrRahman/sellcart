@@ -20,7 +20,7 @@ const ProductGrid = ({ products }) => {
                 <Image
                   src={product.thumbnail}
                   fill={true}
-                  objectFit="cover"
+                  style={{ objectFit: "cover" }}
                   alt="product-image"
                   className="rounded-xl"
                 />

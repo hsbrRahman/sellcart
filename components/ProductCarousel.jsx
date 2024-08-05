@@ -9,7 +9,7 @@ import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 import Image from "next/image";
 import "./styles.css";
 
-const ProductCarousel = () => {
+const ProductCarousel = ({ product }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   return (
     <div className="w-[600px] h-[600px] text-black relative">
@@ -30,25 +30,30 @@ const ProductCarousel = () => {
           modules={[FreeMode, Navigation, Thumbs, Autoplay]}
           className="mySwiper2 w-full h-full"
         >
-          <SwiperSlide className="text-center font-medium flex justify-center align-center">
-            <div className="block w-full h-full object-cover bg-cover bg-center">
-              <Image
-                src="https://firebasestorage.googleapis.com/v0/b/sellmart-5f2b4.appspot.com/o/products%2F8GHPOVr28xQ3ZeYnIBlWUPQLIUJ3%2FUntitled.jpgb5d36174?alt=media&token=d2a93c56-a8a3-4613-9118-ac5277996309"
-                fill={true}
-                alt="image"
-              />
-            </div>
-            {/* <img src="https://swiperjs.com/demos/images/nature-1.jpg" /> */}
+          {product.images.map((image, index) => {
+            return (
+              <SwiperSlide
+                key={index}
+                className="text-center font-medium flex justify-center align-center"
+              >
+                <div className="block w-full h-full object-cover bg-cover bg-center">
+                  <Image src={image} fill={true} alt="image" />
+                </div>
+              </SwiperSlide>
+            );
+          })}
+          {/* <SwiperSlide >
+            <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
           </SwiperSlide>
 
           <SwiperSlide>
-            {/* <img src="https://swiperjs.com/demos/images/nature-2.jpg" /> */}
+            <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
             2
           </SwiperSlide>
           <SwiperSlide>
-            {/* <img src="https://swiperjs.com/demos/images/nature-3.jpg" /> */}
+            <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
             3
-          </SwiperSlide>
+          </SwiperSlide> */}
         </Swiper>
         <Swiper
           onSwiper={setThumbsSwiper}
@@ -60,14 +65,18 @@ const ProductCarousel = () => {
           modules={[FreeMode, Navigation, Thumbs]}
           className="mySwiper box-border px-2 py-0 h-[20%]"
         >
-          <SwiperSlide>
-            {/* <img src="https://swiperjs.com/demos/images/nature-1.jpg" /> */}
-            88
-          </SwiperSlide>
-          <SwiperSlide>
-            {/* <img src="https://swiperjs.com/demos/images/nature-2.jpg" /> */}
-            77
-          </SwiperSlide>
+          {product.images.map((image, index) => {
+            return (
+              <SwiperSlide
+                key={index}
+                className="text-center font-medium flex justify-center align-center"
+              >
+                <div className="block w-full h-full object-cover bg-cover bg-center">
+                  <Image src={image} fill={true} alt="image" />
+                </div>
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
       </>
     </div>
